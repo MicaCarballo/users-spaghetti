@@ -4,5 +4,7 @@ const userServices = require('./users.services')
 router.get("/", userServices.getAllUsers)
 router.get("/:id", userServices.getUserById)
 router.post("/", userServices.postUser)
+router.patch("/:id", userServices.patchUser)
+router.delete("/:id", userServices.deleteUser)
 
 module.exports = router;

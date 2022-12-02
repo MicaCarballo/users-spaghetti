@@ -36,17 +36,41 @@ const postUser = (req,res) => {
     })
 }
 
-const patchUser = () => {
-    
-}
+const patchUser = (req,res) => {
+    const id = req.params.id;
+    const{first_name, last_name,email,password,birthday} = req.body;
+    userControllers.updateUser(id, {first_name, last_name, email,password,birthday})
+    .then((data)=>{
+        if(data){
+            res.status(200).json({message:'user updated'})
+        }else{
+            res.status(400).json({message:'invalid id'})
 
-const deleteUser = () => {
-    
+        }
+    });
+       
+   
+    }
+
+
+const deleteUser = (req,res) => {
+    const id = req.params.id;
+    const {first_name,last_name,email,password,birthday} = req.body;
+    userControllers.deleteUser(id,{first_name,last_name,email,password,birthday})
+  .then((data)=>{
+    if(data){
+res.status(200).json({message:'user deleted'})
+    }else{
+res.status(400).json({message:'invalid id'})
+    }
+  })
 }
 
 
 module.exports ={
     getAllUsers,
     getUserById,
-    postUser
+    postUser,
+    patchUser,
+    deleteUser
 }
